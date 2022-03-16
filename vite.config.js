@@ -7,6 +7,7 @@ export default defineConfig({
   root,
   publicDir: 'public',
   build: {
+    target: 'modules',
     outDir: path.resolve(__dirname, './dist'),
     rollupOptions: {
       input: {
