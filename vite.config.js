@@ -1,17 +1,20 @@
 import { defineConfig } from 'vite'
 import path from 'path'
 
-const root = path.resolve(__dirname, './src')
+const { PORT } = process.env
+const src = path.resolve(__dirname, './src')
+const dist = path.resolve(__dirname, './dist')
 
 export default defineConfig({
-  root,
+  root: src,
+  base: '/app/',
   publicDir: 'public',
   build: {
     target: 'modules',
-    outDir: path.resolve(__dirname, './dist'),
+    outDir: dist,
     rollupOptions: {
       input: {
-        index: path.resolve(root, 'index.html'),
+        index: path.resolve(src, 'index.html'),
       },
       output: {
         entryFileNames: 'assets/js/[name].js',
@@ -24,5 +27,9 @@ export default defineConfig({
         },
       },
     },
+  },
+  server: {
+    host: 'localhost',
+    port: PORT || 3000,
   },
 })
